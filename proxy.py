@@ -5,13 +5,14 @@ IP = 'localhost'
 porta_proxy = 2048
 porta_destino = 80
 timeout = 1000
+texto = 0
 
 servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 servidor.bind((IP, porta_proxy))
 servidor.listen(5)
 
 internet = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-internet.connect((IP, porta_proxy))
+internet.connect((IP, porta_destino))
 
 def servidorListen (servidor):
 	while True:
@@ -25,15 +26,16 @@ def servidorListen (servidor):
 		objeto.close()
 
 def internetSend (internet):
-	mensagem = raw_input()
-	while mensagem <> '\x18':
-		internet.send(mensagem)
-		mensagem = raw_input()
+	#mensagem = raw_input()
+	while (texto != 0):
+		internet.send(texto)
+		texto = 0
+		#mensagem = raw_input()
 	internet.close()
 
 try:
-	thread.start_new_thead(servidorListen, (servidor, ))
-	thread.start_new_thead(internetSend, (internet, ))
+	thread.start_new_thread( servidorListen, (servidor, ) )
+	thread.start_new_thread( internetSend, (internet, ) )
 except:
 	print "Erro."
 while 1:
