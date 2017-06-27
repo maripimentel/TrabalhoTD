@@ -1,2 +1,2 @@
 # TrabalhoTD
-Servidor Proxy feito por Mariana Pimentel e Rafaela Sinhoroto
+Servidor Proxy em Python feito por Mariana Pimentel (14/0085360) e Rafaela Sinhoroto (14/0091696)
